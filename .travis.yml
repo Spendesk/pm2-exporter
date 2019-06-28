@@ -4,6 +4,10 @@ go:
   - 1.12.x
   - master
 
+branches:
+  only:
+    - master
+
 cache:
   directories:
     - bin/
