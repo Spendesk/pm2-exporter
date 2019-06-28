@@ -20,7 +20,11 @@ func main() {
 	app.Action = run
 	app.Version = "v1.0.2"
 
-	app.Run(os.Args)
+	err := app.Run(os.Args)
+	if err != nil {
+		log.Printf("app run error")
+		log.Fatal(err)
+	}
 }
 
 func run(ctx *cli.Context) {
