@@ -17,10 +17,16 @@ env:
     GO111MODULE: "on"
 
 stages:
+  - lint
   - build
+
+before_script:
+  - go install github.com/golangci/golangci-lint/cmd/golangci-lint
 
 jobs:
   include:
+    - stage: lint
+        - golangci-lint run
     - stage: build
       script:
         - CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o bin/pm2-exporer_linux_amd64
