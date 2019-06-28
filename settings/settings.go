@@ -25,7 +25,7 @@ func NewContext() []cli.Flag {
 			Value:       30,
 			Destination: &Refresh,
 			EnvVar:      "REFRESH",
-			Usage:       "Refresh time PM2 status",
+			Usage:       "PM2 status refresh interval",
 		},
 		cli.Int64Flag{
 			Name:        "port, p",
