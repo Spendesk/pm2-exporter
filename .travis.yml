@@ -1,31 +1,39 @@
 language: go
 go:
-  - 1.11.x
   - 1.12.x
-  - master
+
+branches:
+  only:
+    - master
+    - develop
 
 cache:
   directories:
     - bin/
 
 env:
-  global:
-    GO111MODULE: "on"
+  - GO111MODULE=on
 
 stages:
+  - lint
   - build
 
 jobs:
   include:
+    - stage: lint
+      before_script:
+        - go install github.com/golangci/golangci-lint/cmd/golangci-lint
+      script:
+        - golangci-lint run
     - stage: build
       script:
         - CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o bin/pm2-exporer_linux_amd64
 
-deploy:
-  provider: releases
-  api_key:
-    secure: "vGo2zEEEgWB2BOphFoTJhlZoeQHHek77utM0vqAiDWVFbul7CgdNMoPZ23/d9WUklj3rzNnTUSh/azbzSg4gVPtEAvOaHmwaix4rZAblyAPwWm7QH11C1M9dK3/E/peP+EW+41vVaOp2MCyPNBHdh7yezKbvMc4TgOTi4b24DNVZpsgAzhV3FGI+3PVMEoMioz9cYwDDY7yzGOGwZUBGN3dy6brh4uZM2StsEX5ZxX3IGNZHPc6Y6PNb/KhVLSLSEQ+Y/9QsKFoI5NK2MiGBpieCbtj0AO3GLq2coFy8SLQ6e97WBxdXrQQlnRJYzBPyfGuykHbVFIrJwi3dS/uBJE21GUpB0XKcHei/eiaUFKIQguvhClbU6CA8tZpi5faLDAlWLDF7AB//dkcEhRTvloZ+rmi7zbI8Q1cLw+jsyNnQgT09fJEvWeNb1n9GgjeYT5qbf4NoC0Zfft0aYJ/vd/V5WHYeQeIDv0uDwhMhiYhCg1Vbt6BXVzmIqO6uWT/s8ViYtS+mE82SjIkvrfWTcIouZyD0WpVU+tdO4++/+ZhZfscDNJDQun1qrdTLPulbmNAv0uOvE8+XAEciO01sVODcz4jejpslcZRwdbKQP6fIqddYgIranPJyFXwkzYvBE/1RS5UbKpa4yNsRYjNsF5fkOYuszMq+3MqEhIWYxew="
-  skip_cleanup: true
-  file: bin/pm2-exporer_linux_amd64
-  on:
-    tags: true
+# deploy:
+#   provider: releases
+#   api_key:
+#     secure: "vGo2zEEEgWB2BOphFoTJhlZoeQHHek77utM0vqAiDWVFbul7CgdNMoPZ23/d9WUklj3rzNnTUSh/azbzSg4gVPtEAvOaHmwaix4rZAblyAPwWm7QH11C1M9dK3/E/peP+EW+41vVaOp2MCyPNBHdh7yezKbvMc4TgOTi4b24DNVZpsgAzhV3FGI+3PVMEoMioz9cYwDDY7yzGOGwZUBGN3dy6brh4uZM2StsEX5ZxX3IGNZHPc6Y6PNb/KhVLSLSEQ+Y/9QsKFoI5NK2MiGBpieCbtj0AO3GLq2coFy8SLQ6e97WBxdXrQQlnRJYzBPyfGuykHbVFIrJwi3dS/uBJE21GUpB0XKcHei/eiaUFKIQguvhClbU6CA8tZpi5faLDAlWLDF7AB//dkcEhRTvloZ+rmi7zbI8Q1cLw+jsyNnQgT09fJEvWeNb1n9GgjeYT5qbf4NoC0Zfft0aYJ/vd/V5WHYeQeIDv0uDwhMhiYhCg1Vbt6BXVzmIqO6uWT/s8ViYtS+mE82SjIkvrfWTcIouZyD0WpVU+tdO4++/+ZhZfscDNJDQun1qrdTLPulbmNAv0uOvE8+XAEciO01sVODcz4jejpslcZRwdbKQP6fIqddYgIranPJyFXwkzYvBE/1RS5UbKpa4yNsRYjNsF5fkOYuszMq+3MqEhIWYxew="
+#   skip_cleanup: true
+#   file: bin/pm2-exporer_linux_amd64
+#   on:
+#     tags: true

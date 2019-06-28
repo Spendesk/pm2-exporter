@@ -75,7 +75,11 @@ func GetPm2Info() {
 		}
 
 		// transform exec output to struct
-		json.Unmarshal(out, &list)
+		err = json.Unmarshal(out, &list)
+		if err != nil {
+			log.Printf("json unmarshal error")
+			log.Println(err)
+		}
 
 		// parse data
 		for _, process := range list {
