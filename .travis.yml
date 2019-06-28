@@ -12,8 +12,7 @@ cache:
     - bin/
 
 env:
-  global:
-    GO111MODULE: "on"
+  - GO111MODULE=on
 
 stages:
   - lint
