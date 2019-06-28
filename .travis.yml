@@ -31,3 +31,4 @@ deploy:
   file: bin/pm2-exporer_linux_amd64
   on:
     repo: Spendesk/pm2-exporter
+    tags: true
