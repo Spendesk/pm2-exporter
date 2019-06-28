@@ -2,11 +2,6 @@ language: go
 go:
   - 1.12.x
 
-branches:
-  only:
-    - master
-    - develop
-
 cache:
   directories:
     - bin/
