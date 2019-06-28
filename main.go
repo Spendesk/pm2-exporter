@@ -18,7 +18,7 @@ func main() {
 	app.Name = "pm2-exporter"
 	app.Flags = settings.NewContext()
 	app.Action = run
-	app.Version = "v1.1.1"
+	app.Version = "v1.1.2"
 
 	err := app.Run(os.Args)
 	if err != nil {
