@@ -1,6 +1,7 @@
+[![Build Status](https://travis-ci.com/Spendesk/pm2-exporter.svg?token=sPBEAwpUkF9bZVsWNMyJ&branch=master)](https://travis-ci.com/Spendesk/pm2-exporter)
+
 # pm2-exporter
 Exporte CPU Usage/Memory Usage and Restart Time PM2 process
-
 
 ## Options
 | Name | Env | Parameter | Default | Description | 
