@@ -23,6 +23,7 @@ jobs:
     - stage: build
       script:
         - CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o bin/pm2-exporter_linux_amd64
+        - bash bin/pm2-exporter_linux_amd64 -v
 
 deploy:
   provider: releases
