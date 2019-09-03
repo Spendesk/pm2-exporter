@@ -37,7 +37,7 @@ var (
 			Name: "pm2_process_memory_usage",
 			Help: "Memory Usage from PM2",
 		},
-		[]string{"pid", "name", "pm_id", "version", "node_version", "restart"},
+		[]string{"name", "pm_id", "version", "node_version", "restart"},
 	)
 
 	cpuUsage = prometheus.NewGaugeVec(
@@ -45,7 +45,7 @@ var (
 			Name: "pm2_process_cpu_usage",
 			Help: "CPU Usage from PM2",
 		},
-		[]string{"pid", "name", "pm_id", "version", "node_version", "restart"},
+		[]string{"name", "pm_id", "version", "node_version", "restart"},
 	)
 
 	restartTime = prometheus.NewGaugeVec(
@@ -53,7 +53,7 @@ var (
 			Name: "pm2_process_restart_time",
 			Help: "Restart Count from PM2",
 		},
-		[]string{"pid", "name", "pm_id", "version", "node_version"},
+		[]string{"name", "pm_id", "version", "node_version"},
 	)
 )
 
@@ -84,7 +84,6 @@ func GetPm2Info() {
 		// parse data
 		for _, process := range list {
 			memoryUsage.WithLabelValues(
-				strconv.Itoa(process.Pid),
 				process.Name,
 				strconv.Itoa(process.PmID),
 				process.Pm2Env.Version,
@@ -93,7 +92,6 @@ func GetPm2Info() {
 			).Set(float64(process.Monit.Memory))
 
 			cpuUsage.WithLabelValues(
-				strconv.Itoa(process.Pid),
 				process.Name,
 				strconv.Itoa(process.PmID),
 				process.Pm2Env.Version,
@@ -102,7 +100,6 @@ func GetPm2Info() {
 			).Set(float64(process.Monit.CPU))
 
 			restartTime.WithLabelValues(
-				strconv.Itoa(process.Pid),
 				process.Name,
 				strconv.Itoa(process.PmID),
 				process.Pm2Env.Version,
