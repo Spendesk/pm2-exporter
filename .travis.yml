@@ -4,7 +4,7 @@ go:
 
 branches:
   only:
-    - master
+    - /^v.*$/
 
 env:
   - GO111MODULE=on
