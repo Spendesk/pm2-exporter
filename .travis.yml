@@ -8,7 +8,6 @@ env:
 stages:
   - lint
   - build
-  - deploy
 
 jobs:
   include:
