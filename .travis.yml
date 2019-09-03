@@ -2,10 +2,6 @@ language: go
 go:
   - 1.12.x
 
-cache:
-  directories:
-    - bin/
-
 env:
   - GO111MODULE=on
 
@@ -21,12 +17,14 @@ jobs:
         - go install github.com/golangci/golangci-lint/cmd/golangci-lint
       script:
         - golangci-lint run
+      on:
+        tags: true
     - stage: build
       script:
         - CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o bin/pm2-exporter_linux_amd64
         - bash bin/pm2-exporter_linux_amd64 -v
-    - stage: deploy
-      script: skip
+      on:
+        tags: true
       deploy:
         provider: releases
         skip_cleanup: true
