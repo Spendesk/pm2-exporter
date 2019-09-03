@@ -20,19 +20,12 @@ jobs:
         - go install github.com/golangci/golangci-lint/cmd/golangci-lint
       script:
         - golangci-lint run
-      on:
-        tags: true
     - stage: build
       script:
         - CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o bin/pm2-exporter_linux_amd64
-      on:
-        tags: true
       deploy:
         provider: releases
         skip_cleanup: true
         api_key:
           secure: WFBXy5jF27q6TrpB0nDxa/jbmLNmp0WVYUWKNfCXNS/n+Yyq5rXQNjA3HWBRWjF1asfAKmRFpJIJhbBnhDe0tyj5xAuPYzWxApCZfQlqyGR0m65lGB+fWir26IChqFW0Z0dunK92P0vmwrsTsduUX6+fMRqkIrgQlhSnZcpOefCTxQfJCF8hP6LPruJmAGCd4yPpgjs9rD7uOAd9UaW/0pwFGZUtcfJfb6z/Kwf/gBDNIbXbrJtOxT+WvCL5qadaNUaG7zKjcqr+oYbZsIGGcLrdEk26f76pJ+wH4qHHtU166goOiPUqGsmJmZgXApRucsk597DOm2EF/RvdyriuFWxlMu9MW0fti4XI6eOyGRPULOV9/9dm3MpDByxzdt9uOjA8f1TVN2TH131DgTJ2FSYgKE1KY87UZiJ3sN1qBKsGydCpM6DvqHU9QYci3BklCkbSGHo6AjtUo8n9TUo83p4fONP8hwObT7lJZgO5AJxwol69wbm45XP/zVf528ZAFuLocU+ccfVZzlWRXBEzgayjcghiBUzJrLcdB3VUga5SsFAn/DAyAZy71JCgPnTOs11dflHGwCV2YrtD9Gf9MPm9dWv8eE3W2GOA/O+CDZ7+R5kguJpz1BoF730HAlDfCa4TASgasSXdJCn0i9QFjyolSiDdxJC9D8jWrc+ONoE=
         file: bin/pm2-exporter_linux_amd64
-        on:
-          repo: Spendesk/pm2-exporter
-          tags: true
