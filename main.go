@@ -13,12 +13,16 @@ import (
 	"github.com/urfave/cli"
 )
 
+var (
+	version = "development"
+)
+
 func main() {
 	app := cli.NewApp()
 	app.Name = "pm2-exporter"
 	app.Flags = settings.NewContext()
 	app.Action = run
-	app.Version = "v1.2.4"
+	app.Version = version
 
 	err := app.Run(os.Args)
 	if err != nil {
