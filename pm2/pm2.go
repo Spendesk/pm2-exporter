@@ -37,7 +37,7 @@ var (
 			Name: "pm2_process_memory_usage",
 			Help: "Memory Usage from PM2",
 		},
-		[]string{"name", "pm_id", "version", "node_version"},
+		[]string{"pm_name", "pm_id", "version", "node_version"},
 	)
 
 	cpuUsage = prometheus.NewGaugeVec(
@@ -45,7 +45,7 @@ var (
 			Name: "pm2_process_cpu_usage",
 			Help: "CPU Usage from PM2",
 		},
-		[]string{"name", "pm_id", "version", "node_version"},
+		[]string{"pm_name", "pm_id", "version", "node_version"},
 	)
 
 	restartTime = prometheus.NewGaugeVec(
@@ -53,7 +53,7 @@ var (
 			Name: "pm2_process_restart_time",
 			Help: "Restart Count from PM2",
 		},
-		[]string{"name", "pm_id", "version", "node_version"},
+		[]string{"pm_name", "pm_id", "version", "node_version"},
 	)
 )
 
