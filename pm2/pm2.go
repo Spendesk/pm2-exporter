@@ -2,6 +2,7 @@ package pm2
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"os/exec"
 	"strconv"
@@ -80,6 +81,8 @@ func GetPm2Info() {
 			log.Printf("json unmarshal error")
 			log.Println(err)
 		}
+
+		fmt.Println(list)
 
 		// parse data
 		for _, process := range list {
